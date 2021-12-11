@@ -16,14 +16,28 @@ public class OrderManager {
 
     private EmailNotification emailNotification = new EmailNotification();
 
-    private PaymentService paymentService = new PaymentService();
-
     private LogService logService = new LogService(new LogHandler(LogHandler.LogHandlerType.FILE));
+    /*
+    private PaymentService paymentService = new PaymentService();
 
     public void payOrder(PaymentService.PaymentType paymentType) {
         order.setStatus(Order.OrderStatus.IN_PROGRESS);
         try {
             paymentService.doPayment(paymentType);
+            order.setStatus(Order.OrderStatus.PAYMENT_SUCCESS);
+            emailNotification.sendMailNotification(String.format("Order %d completed successfully", order.getId()));
+            logService.info("payment finished");
+        } catch (Exception e) {
+            logService.error("payment refused");
+            order.setStatus(Order.OrderStatus.PAYMENT_REFUSED);
+            emailNotification.sendMailNotification(String.format("Order %d refused", order.getId()));
+        }
+    }
+    */
+    public void payOrder(PaymentService paymentService) {
+        order.setStatus(Order.OrderStatus.IN_PROGRESS);
+        try {
+            paymentService.doPayment();
             order.setStatus(Order.OrderStatus.PAYMENT_SUCCESS);
             emailNotification.sendMailNotification(String.format("Order %d completed successfully", order.getId()));
             logService.info("payment finished");

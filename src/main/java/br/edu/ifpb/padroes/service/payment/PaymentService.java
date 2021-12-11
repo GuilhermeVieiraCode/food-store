@@ -2,9 +2,25 @@ package br.edu.ifpb.padroes.service.payment;
 
 public class PaymentService {
 
+    private StrategyPayment strategyPayment;
+
+    public PaymentService(StrategyPayment strategyPayment){
+        this.strategyPayment = strategyPayment;
+    }
+
+    public void doPayment(){
+        strategyPayment.definePayment();
+    }
+
+    public void setPaymentType(StrategyPayment strategyPayment){
+        this.strategyPayment = strategyPayment;
+    }
+
+    /*
     public enum PaymentType {
         CREDIT_CARD, DEBIT, BILLET, PAYPAL
     }
+
 
     public void doPayment(PaymentType type) throws Exception {
         switch (type) {
@@ -24,8 +40,6 @@ public class PaymentService {
                 throw new Exception("unknown payment method");
         }
 
-
+    */
 
     }
-
-}
