@@ -1,6 +1,7 @@
 package br.edu.ifpb.padroes;
 
 import br.edu.ifpb.padroes.domain.Order;
+import br.edu.ifpb.padroes.service.mail.EmailNotification;
 import br.edu.ifpb.padroes.service.order.OrderManager;
 import br.edu.ifpb.padroes.service.payment.PaymentService;
 import br.edu.ifpb.padroes.service.payment.StrPaymentCredit;
@@ -10,6 +11,7 @@ public class Client {
 
         Order order = new Order();
         OrderManager orderManager = new OrderManager(order);
+        orderManager.events.subscribe("email", new EmailNotification());
         StrPaymentCredit creditPayment = new StrPaymentCredit();
         PaymentService paymentService = new PaymentService(creditPayment);
         orderManager.payOrder(paymentService);

@@ -2,7 +2,7 @@ package br.edu.ifpb.padroes.service.mail;
 
 import br.edu.ifpb.padroes.domain.Customer;
 
-public class EmailNotification {
+public class EmailNotification implements EventListener {
 
     private String emailAdministration = "contact@food-store.com";
 
@@ -14,5 +14,14 @@ public class EmailNotification {
         System.out.println("send mail notification to ="+emailAdministration);
     }
 
+    @Override
+    public void update(String message, Customer customer) {
+        this.sendMailNotification(message, customer);
+    }
+
+    @Override
+    public void update(String message) {
+        this.sendMailNotification(message);
+    }
 
 }
